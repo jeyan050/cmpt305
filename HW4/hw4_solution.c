@@ -319,15 +319,8 @@ struct QueueNode* ProcessArrival(struct Queue* elementQ, struct QueueNode* arriv
     addToEventList(elementQ, nextArrival, nextArrival->arrival_time, 1);
   }
 
-  if (elementQ->waiting_count == 0){
-    if (inService1 == false || inService2 == false){
-      addToEventList(elementQ, elementQ->first, elementQ->first->arrival_time, 2);
-    }
-  } else {
-    if (elementQ->first == NULL)            // If no nodes in system, set new node to be start of waitlist in system
-      elementQ->first = arrival;
-    
-    elementQ->last = arrival;               // Add node to be back of queue
+  if (inService1 == false || inService2 == false){
+    addToEventList(elementQ, elementQ->first, elementQ->first->arrival_time, 2);
   }
 
   if (arrival->next == NULL)  // Set next element to be either next element in waitlist of system
